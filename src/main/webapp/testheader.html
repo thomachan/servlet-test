@@ -1,0 +1,52 @@
+   <! DOCTYPE html>
+   <html>
+   <head>
+   <meta charset="UTF-8">  
+   <title>Login</title>
+   </head>
+   <body>
+   <div class="container-test">
+   <h3>
+    <strong>iDNS</strong>
+   </h3>
+   </div>
+   <div class="container">
+   <form id="loginForm" name="loginForm" >
+   <div class="errmsg text-center"></div>
+   <label for="inputEmail">Email address</label> <input
+   type="email"
+   id="emailId" class="form-control" name="emailId"<label
+    type="password"
+    placeholder="Email address" required autofocus> <br>
+   for="inputPassword">Password</label> <input
+   id="password" class="form-control" name="password"
+   placeholder="Password" required> <br>
+   <!-- id="login-submit" -->
+   <button type="button" class="btn btn-lg btn-primary btn-block"
+   onclick="doLogin()">Sign in</button>
+   </form>
+   </div>
+   <script>
+   function doLogin() {
+   var userName = window
+   .btoa(document.getElementById('emailId').value);
+   var password = window
+   .btoa(document.getElementById('password').value);
+   var formData = JSON.stringify({
+         userName : userName,
+         password : password
+     });
+    var xhr = new XMLHttpRequest();
+     xhr.open("POST", "/servlet-test/test");
+     xhr.setRequestHeader("Content-type", "application/json");
+     xhr.send(formData);
+     xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4){
+			alert(xhr.getResponseHeader("AUTHORIZATION"));//null
+			//window.location.href = xhr.responseURL;//Redirect works
+		}
+     }
+    }
+    </script>
+     </body>
+     </html>
